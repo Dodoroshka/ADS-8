@@ -1,12 +1,16 @@
 // Copyright 2021 NNTU-CS
-#include <fstream>
-#include <iostream>
-#include <cctype>
-#include <string>
 #include "bst.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cctype>
+#include <vector>
+#include <algorithm>
+
 bool isLatinLetter(char ch) {
     return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
 }
+
 char toLowerChar(char ch) {
     if (ch >= 'A' && ch <= 'Z') {
         return ch + ('a' - 'A');
@@ -19,6 +23,7 @@ void makeTree(BST<std::string>& tree, const char* filename) {
         std::cout << "Error: Cannot open file " << filename << std::endl;
         return;
     }
+    std::vector<std::string> words;
     std::string currentWord = "";
     char ch;
     while (file.get(ch)) {
@@ -26,21 +31,26 @@ void makeTree(BST<std::string>& tree, const char* filename) {
             currentWord += toLowerChar(ch);
         } else {
             if (!currentWord.empty()) {
-                tree.add(currentWord);
+                words.push_back(currentWord);
                 currentWord.clear();
             }
         }
     }
     if (!currentWord.empty()) {
-        tree.add(currentWord);
+        words.push_back(currentWord);
     }
     file.close();
+    std::sort(words.begin(), words.end());
+    words.erase(std::unique(words.begin(), words.end()), words.end());
+    for (const auto& word : words) {
+        tree.add(word);
+    }
     std::cout << "File processed successfully!" << std::endl;
     std::cout << "Unique words: " << tree.getSize() << std::endl;
     std::cout << "Tree depth: " << tree.depth() << std::endl;
 }
 void printFreq(BST<std::string>& tree) {
-    std::cout << "\nWord Frequency Analysis" << std::endl;
-    std::cout << "Words sorted by frequency :" << std::endl;
+    std::cout << "\n Word Frequency Analysis" << std::endl;
+    
     tree.printSortedByFrequency();
 }
