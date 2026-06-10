@@ -37,9 +37,12 @@ void makeTree(BST<std::string>& tree, const char* filename) {
     file.close();
     std::cout << "File processed successfully!" << std::endl;
     std::cout << "Unique words: " << tree.getSize() << std::endl;
+    std::cout << "Tree depth: " << tree.depth() << std::endl;
 }
 void printFreq(BST<std::string>& tree) {
     std::cout << "\nWord Frequency Analysis" << std::endl;
-    std::cout << "Words sorted by frequency (descending):" << std::endl;
+    std::cout << "Words sorted by frequency :" << std::endl;
     tree.printSortedByFrequency();
+    tree.saveToFile("result/freq.txt");   
+    std::cout << "\nResults saved to result/freq.txt" << std::endl;
 }
