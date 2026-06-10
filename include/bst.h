@@ -32,16 +32,16 @@ class BST {
         }
         return node;
     }
-    bool searchNode(Node* node, const T& value) const {
+    int searchNode(Node* node, const T& value) const {
         if (node == nullptr) {
-            return false;
+            return 0;
         }
         if (value < node->data) {
             return searchNode(node->left, value);
         } else if (value > node->data) {
             return searchNode(node->right, value);
         } else {
-            return true;
+            return node->count;
         }
     }
     int depthNode(Node* node) const {
@@ -84,7 +84,7 @@ class BST {
     void add(const T& value) {
         root = addNode(root, value);
     }
-    bool search(const T& value) const {
+    int search(const T& value) const {
         return searchNode(root, value);
     }
     int depth() const {
