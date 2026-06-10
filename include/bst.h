@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 template <typename T>
 class BST {
  private:
@@ -12,7 +13,7 @@ class BST {
         Node* left;
         Node* right;
         int count;
-        Node(const T& value) : data(value), left(nullptr), right(nullptr), count(1) {}
+        explicit Node(const T& value) : data(value), left(nullptr), right(nullptr), count(1) {}
     };
     Node* root;
     int max(int a, int b) const {
@@ -74,6 +75,7 @@ class BST {
             }
         }
     }
+
  public:
     BST() : root(nullptr) {}
     ~BST() {
@@ -116,6 +118,7 @@ class BST {
         }
         delete[] nodes;
     }
+
  private:
     int getSizeNode(Node* node) const {
         if (node == nullptr) return 0;
