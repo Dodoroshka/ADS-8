@@ -43,6 +43,4 @@ void printFreq(BST<std::string>& tree) {
     std::cout << "\nWord Frequency Analysis" << std::endl;
     std::cout << "Words sorted by frequency :" << std::endl;
     tree.printSortedByFrequency();
-    tree.saveToFile("result/freq.txt");   
-    std::cout << "\nResults saved to result/freq.txt" << std::endl;
 }
