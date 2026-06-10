@@ -88,7 +88,7 @@ class BST {
         return searchNode(root, value);
     }
     int depth() const {
-        return depthNode(root);
+        return depthNode(root) -1;
     }
     void clear() {
         clearNode(root);
