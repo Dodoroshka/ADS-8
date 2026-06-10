@@ -85,7 +85,7 @@ class BST {
   }
 
   int depth() const {
-    return depth(root_);
+    return depth(root_) - 1;
   }
 };
 
